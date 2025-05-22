@@ -123,3 +123,31 @@ circos.trackPlotRegion(
         col = "black",
         lwd = 1
       )
+
+      # 添加条形图
+      circos.rect(
+        xleft = xleft, 
+        ybottom = 0, 
+        xright = xright, 
+        ytop = sector_data$value[i] / max_value,
+        col = colors[sector_data$group[i]], 
+        border = "black",
+        lwd = 1
+      )
+      
+      # 添加显著性标记
+      circos.text(
+        (xleft + xright) / 2,  # 中间位置
+        (sector_data$value[i] + sector_data$std_error[i]) / max_value + 0.05,  # 设置符号在柱子上方
+        labels = sector_data$significance[i],  # 使用显著性标记
+        col = "black", 
+        cex = 0.8,
+        facing = "inside",
+        adj = c(0.5, 0)
+      )
+    }
+  }
+)
+
+# 添加图例
+legend("topright", legend = c("KB", "BC", "BAc"), fill = colors, bty = "n", cex = 0.8)
