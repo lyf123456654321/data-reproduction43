@@ -54,7 +54,7 @@ circos.trackPlotRegion(
   bg.col = adjustcolor(category_colors, alpha.f = 0.4), 
   panel.fun = function(x, y) {
     sector_data <- data[data$category == CELL_META$sector.index, ]
-
+    
     # 计算最大值并进行调整
     if (max(sector_data$value) < 10) {
       max_value <- ceiling(max(sector_data$value) * 1.3 )   # 调整最大值
