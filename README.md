@@ -82,3 +82,44 @@ circos.trackPlotRegion(
         adj = c(0.5, 0), 
         cex = 0.3
       )
+
+ # 在左边添加刻度线
+      circos.lines(
+        CELL_META$cell.xlim[1] + c(-0.02, 0), 
+        c(a, a) / max_value
+      )
+      circos.axis(
+        h = "top",
+        major.at = seq(0, 1, by = 0.3),
+        major.tick.length = -0.05,
+        minor.ticks = 1,
+        labels = FALSE
+      )
+    }    
+    
+    bar_width <- 0.2  # 条形图宽度
+    gap_width <- 0.1  # 条形图之间的间隔宽度
+    
+    # 计算每个类别内柱子的数量
+    num_bars <- nrow(sector_data)
+    
+    for (i in 1:num_bars) {
+      # 计算每个柱子的起始和结束位置
+      xleft <- (i+0.3) * (bar_width + gap_width) - (num_bars - 1) * (bar_width + gap_width) / 2
+      xright <- xleft + bar_width
+      
+      # 添加误差线
+      error_top <- sector_data$value[i] + sector_data$std_error[i]
+      error_bottom <- sector_data$value[i] - sector_data$std_error[i]
+      circos.segments(
+        (xleft + xright) / 2, error_bottom / max_value,
+        (xleft + xright) / 2, error_top / max_value,
+        col = "black",
+        lwd = 1
+      )
+      circos.segments(
+        (xleft + xright) / 2 - 0.03, error_top / max_value,
+        (xleft + xright) / 2 + 0.03, error_top / max_value,
+        col = "black",
+        lwd = 1
+      )
