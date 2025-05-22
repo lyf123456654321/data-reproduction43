@@ -1,4 +1,5 @@
 # 基于期刊 Journal of Hazardous Materials 中的文献 Enhanced nitrogen fixation and Cd passivation in rhizosphere soil by biochar-loaded nitrogen-fixing bacteria: Chemisorption and microbial mechanism（https://doi.org/10.1016/j.jhazmat.2024.136588) 进行数据复现。
+
 library(circlize)
 
 # 读取数据
