@@ -1,13 +1,18 @@
-# 基于期刊 Journal of Hazardous Materials 中的文献 Enhanced nitrogen fixation and Cd passivation in rhizosphere soil by biochar-loaded nitrogen-fixing bacteria: Chemisorption and microbial mechanism（https://doi.org/10.1016/j.jhazmat.2024.136588) 进行数据复现。
+# 基于期刊 Journal of Hazardous Materials 中的文献 Enhanced nitrogen fixation and Cd passivation in rhizosphere soil by biochar-loaded nitrogen-fixing bacteria: Chemisorption and microbial mechanism（https://doi.org/10.1016/j.jhazmat.2024.136588) 进行数据复现Fig.2c。
+
+# 解决思路
+小组在进行复现文献数据图时，首先明确了目标数据图的类型和结构，通过解析原图的坐标系、核心元素（如柱状图、误差条）及辅助信息（图例、注释），确定适用的工具包（'circlize'绘制环形图）。数据收集阶段通过给文献作者发送邮件获取原始数据。代码实现时通过观看视频学习以及AI工具如deepseek辅助生成代码框架以及解释报错信息。从数据验证、可视化对比到参数微调，整体流程进行了多次迭代优化，最终实现了数据的复现。
 
 library(circlize)
 
 # 读取数据
+
 data  = readxl::read_xlsx("circlize_bar_with_errorbar.xlsx")
 
 data$category <- factor(data$category, levels = c("Forks", "Crossings", "Length", "SurfArea", "AvgDiam", "RootVolume", "Tips"))
 
 # 定义颜色
+
 colors <- c("KB" = "#70c3f0", "BC" = "#bfe0f6", "BAc" = "#e0eef6")
 category_colors <- c("Forks" = "#fdf2c5", 
                      "Crossings" = "#ffeff9", 
