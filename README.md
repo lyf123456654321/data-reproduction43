@@ -53,3 +53,32 @@ circos.trackPlotRegion(
   bg.col = adjustcolor(category_colors, alpha.f = 0.4), 
   panel.fun = function(x, y) {
     sector_data <- data[data$category == CELL_META$sector.index, ]
+
+    # 计算最大值并进行调整
+    if (max(sector_data$value) < 10) {
+      max_value <- ceiling(max(sector_data$value) * 1.3 )   # 调整最大值
+    } else if (max(sector_data$value) >= 10 & max(sector_data$value) < 100) {
+      max_value <- ceiling(max(sector_data$value) * 1.3 / 10) * 10   # 调整为 10 的整倍数
+    } else if (max(sector_data$value) >= 100 & max(sector_data$value) < 1000) {
+      max_value <- ceiling(max(sector_data$value) * 1.2 / 40) * 40  # 调整为 40 的整倍数
+    } else if (max(sector_data$value) >= 1000) {
+      max_value <- ceiling(max(sector_data$value) * 1.2 / 400) * 400  # 调整为 40 的整倍数
+    }
+    
+    # 添加 y 轴刻度线和标签
+    at <- seq(0, max_value, by = max_value / 4)
+    at <- at[-c(1, length(at))]  # 移除第一个和最后一个刻度线和标签
+    for (a in at) {
+      circos.lines(
+        CELL_META$xlim,
+        c(a, a) / max_value, 
+        lty = 5, 
+        col = "grey40"
+      )
+      circos.text(
+        CELL_META$cell.xlim[1] - mm_h(2), 
+        a / max_value, labels = a,
+        facing = "clockwise", 
+        adj = c(0.5, 0), 
+        cex = 0.3
+      )
