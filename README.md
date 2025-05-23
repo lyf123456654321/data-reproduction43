@@ -150,10 +150,10 @@ library(circlize)
         cex = 0.8,
         facing = "inside",
         adj = c(0.5, 0)
-      )
-    }
-  }
-)
+          )
+        }
+      }
+    )
 
     # 添加图例
     legend("topright", legend = c("KB", "BC", "BAc"), fill = colors, bty = "n", cex     = 0.8)
