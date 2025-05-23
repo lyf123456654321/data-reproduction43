@@ -155,5 +155,5 @@ library(circlize)
   }
 )
 
-# 添加图例
-legend("topright", legend = c("KB", "BC", "BAc"), fill = colors, bty = "n", cex = 0.8)
+    # 添加图例
+    legend("topright", legend = c("KB", "BC", "BAc"), fill = colors, bty = "n", cex     = 0.8)
